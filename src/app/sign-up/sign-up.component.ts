@@ -1,23 +1,12 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  FormControl,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { FormControl, Validators } from '@angular/forms';
 import { merge } from 'rxjs';
+import { FormSignUpComponent } from './form-sign-up/form-sign-up.component';
 
 @Component({
   selector: 'nevy11-sign-up',
-  imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
+  imports: [FormSignUpComponent],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -40,5 +29,11 @@ export class SignUpComponent {
     } else {
       this.errorMessage.set('');
     }
+  }
+  //passcode input field
+  hide = signal(true);
+  clickEvent(event: MouseEvent) {
+    this.hide.set(!this.hide());
+    event.stopPropagation();
   }
 }

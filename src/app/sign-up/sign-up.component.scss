@@ -10,6 +10,15 @@
     justify-content: center;
     margin-top: 6rem;
   }
+
+  .form {
+    display: flex;
+    justify-content: center;
+    margin-top: 6rem;
+  }
+  mat-form-field {
+    width: 30rem;
+  }
 }
 
 @media (max-width: 600px) {
@@ -24,6 +33,15 @@
     justify-content: center;
     margin-top: 4rem;
   }
+
+  .form {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+  mat-form-field {
+    width: 20rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -37,5 +55,14 @@
     display: flex;
     justify-content: center;
     margin-top: 8rem;
+  }
+
+  .form {
+    display: flex;
+    justify-content: center;
+    margin-top: 6rem;
+  }
+  mat-form-field {
+    width: 50rem;
   }
 }

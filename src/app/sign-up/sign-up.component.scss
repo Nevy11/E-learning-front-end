@@ -1,0 +1,41 @@
+@media (min-width: 600px) and (max-width: 1024px) {
+  .header {
+    font-size: x-large;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+  }
+
+  .sign_up {
+    display: flex;
+    justify-content: center;
+    margin-top: 6rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    font-size: large;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+  }
+
+  .sign_up {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header {
+    font-size: xx-large;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: bold;
+  }
+
+  .sign_up {
+    display: flex;
+    justify-content: center;
+    margin-top: 8rem;
+  }
+}

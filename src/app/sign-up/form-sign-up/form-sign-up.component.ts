@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { merge } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'nevy11-form-sign-up',
@@ -48,7 +49,9 @@ export class FormSignUpComponent {
       this.signUpForm.controls.password.statusChanges,
       this.signUpForm.controls.username.valueChanges,
       this.signUpForm.controls.username.statusChanges
-    ).subscribe(() => this.errorMessage());
+    )
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => this.errorMessage());
   }
   updateErrorMessage() {
     if (

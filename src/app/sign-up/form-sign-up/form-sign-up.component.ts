@@ -55,9 +55,9 @@ export class FormSignUpComponent {
   }
   updateErrorMessage() {
     if (
-      this.signUpForm.get('email')?.hasError('required') ||
-      this.signUpForm.get('password')?.hasError('required') ||
-      this.signUpForm.get('username')?.hasError('required')
+      this.signUpForm.controls.email.hasError('required') ||
+      this.signUpForm.controls.password.hasError('required') ||
+      this.signUpForm.controls.username.hasError('required')
     ) {
       this.errorMessage.set('You must enter a value');
     } else if (this.signUpForm.get('email')?.hasError('email')) {

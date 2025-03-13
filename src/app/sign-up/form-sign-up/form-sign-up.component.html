@@ -10,12 +10,12 @@
           (blur)="updateErrorMessage()"
           required
         />
-        @if (errorMessage()) {
+        @if (this.signUpForm.controls.email.invalid) {
         <mat-error>{{ errorMessage() }}</mat-error>
         }
       </mat-form-field>
     </div>
-    <div>
+    <!-- <div>
       <mat-form-field>
         <mat-label>Enter your password</mat-label>
         <input matInput [type]="hide() ? 'password' : 'text'" required />
@@ -33,7 +33,7 @@
         <mat-error>{{ errorMessage() }}</mat-error>
         }
       </mat-form-field>
-    </div>
+    </div> -->
     <div>
       <mat-form-field>
         <mat-label>Username</mat-label>
@@ -41,10 +41,11 @@
           matInput
           placeholder="@username"
           formControlName="username"
+          (blur)="updateErrorUsername()"
           required
         />
         @if (this.signUpForm.controls.username.invalid) {
-        <mat-error>{{ errorMessage() }}</mat-error>
+        <mat-error>{{ errorUsernameMessage() }}</mat-error>
         }
       </mat-form-field>
     </div>

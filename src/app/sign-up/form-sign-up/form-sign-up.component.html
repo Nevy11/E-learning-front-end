@@ -7,8 +7,12 @@
           matInput
           placeholder="pat@example.com"
           formControlName="email"
+          (blur)="updateErrorMessage()"
           required
         />
+        @if (this.signUpForm.controls.email.invalid) {
+        <mat-error>{{ errorMessage() }}</mat-error>
+        }
       </mat-form-field>
     </div>
     <div>
@@ -25,6 +29,9 @@
         >
           <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
+        @if (this.signUpForm.controls.password.invalid) {
+        <mat-error>{{ errorMessage() }}</mat-error>
+        }
       </mat-form-field>
     </div>
     <div>
@@ -36,6 +43,9 @@
           formControlName="username"
           required
         />
+        @if (this.signUpForm.controls.username.invalid) {
+        <mat-error>{{ errorMessage() }}</mat-error>
+        }
       </mat-form-field>
     </div>
   </form>

@@ -9,8 +9,6 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { merge } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -44,26 +42,9 @@ export class FormSignUpComponent {
   }
   errorMessage = signal('');
   errorUsernameMessage = signal('');
-  constructor() {
-    // merge(
-    //   this.signUpForm.controls.email.valueChanges,
-    //   this.signUpForm.controls.email.statusChanges,
-    //   this.signUpForm.controls.password.valueChanges,
-    //   this.signUpForm.controls.password.statusChanges,
-    //   this.signUpForm.controls.username.valueChanges,
-    //   this.signUpForm.controls.username.statusChanges
-    // )
-    //   .pipe(takeUntilDestroyed())
-    //   .subscribe(() => this.errorMessage());
-  }
+
   updateErrorMessage() {
-    if (
-      this.signUpForm.controls.email.hasError('required')
-      // ||
-      // this.signUpForm.controls.password.hasError('required')
-      // ||
-      // this.signUpForm.controls.username.hasError('required')
-    ) {
+    if (this.signUpForm.controls.email.hasError('required')) {
       this.errorMessage.set('You must enter a value');
     } else if (this.signUpForm.get('email')?.hasError('email')) {
       this.errorMessage.set('Not a valid email');

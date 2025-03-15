@@ -3,12 +3,12 @@
     font-size: x-large;
     font-family: "Courier New", Courier, monospace;
     font-weight: bold;
+    margin-top: 6rem;
   }
 
   .sign_up {
     display: flex;
     justify-content: center;
-    margin-top: 6rem;
   }
 
   .form {
@@ -17,6 +17,10 @@
   }
   mat-form-field {
     width: 30rem;
+  }
+  .main {
+    height: 100vh;
+    background-image: url(/images/education.jpeg);
   }
 }
 

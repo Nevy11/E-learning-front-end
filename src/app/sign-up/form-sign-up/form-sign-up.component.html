@@ -1,6 +1,6 @@
 <div class="form">
   <form [formGroup]="signUpForm">
-    <div>
+    <div class="email_field">
       <mat-form-field>
         <mat-label>Enter your email</mat-label>
         <input
@@ -15,7 +15,7 @@
         }
       </mat-form-field>
     </div>
-    <div>
+    <div class="password_field">
       <mat-form-field>
         <mat-label>Enter your password</mat-label>
         <input matInput [type]="hide() ? 'password' : 'text'" required />
@@ -34,7 +34,7 @@
         }
       </mat-form-field>
     </div>
-    <div>
+    <div class="username_field">
       <mat-form-field>
         <mat-label>Username</mat-label>
         <input
@@ -48,6 +48,9 @@
         <mat-error>{{ errorUsernameMessage() }}</mat-error>
         }
       </mat-form-field>
+    </div>
+    <div class="bottom-button">
+      <button mat-flat-button type="submit">sign Up</button>
     </div>
   </form>
 </div>

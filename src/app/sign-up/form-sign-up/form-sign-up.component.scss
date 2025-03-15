@@ -3,12 +3,28 @@
   justify-content: center;
 }
 
+.bottom-button {
+  display: flex;
+  justify-content: end;
+}
+
+// Tablet
 @media (min-width: 600px) and (max-width: 1024px) {
   mat-form-field {
     width: 30rem;
   }
+  .email_field {
+    margin-bottom: 3rem;
+  }
+  .password_field {
+    margin-bottom: 3rem;
+  }
+  .username_field {
+    margin-bottom: 3rem;
+  }
 }
 
+// mobile phones
 @media (max-width: 600px) {
   .form {
     margin-top: 2rem;
@@ -16,10 +32,23 @@
   mat-form-field {
     width: 20rem;
   }
+  .email_field {
+    margin-bottom: 1rem;
+  }
+  .password_field {
+    margin-bottom: 1.5rem;
+  }
 }
 
+// larger than tablets
 @media (min-width: 1024px) {
   mat-form-field {
     width: 50rem;
+  }
+  .email_field {
+    margin-bottom: 6rem;
+  }
+  .password_field {
+    margin-bottom: 6rem;
   }
 }

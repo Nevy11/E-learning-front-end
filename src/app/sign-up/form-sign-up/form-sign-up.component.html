@@ -1,5 +1,5 @@
 <div class="form">
-  <form [formGroup]="signUpForm">
+  <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
     <div class="email_field">
       <mat-form-field>
         <mat-label>Enter your email</mat-label>
@@ -18,11 +18,15 @@
     <div class="password_field">
       <mat-form-field>
         <mat-label>Enter your password</mat-label>
-        <input matInput [type]="hide() ? 'password' : 'text'" required />
+        <input
+          formControlName="password"
+          matInput
+          [type]="hide() ? 'password' : 'text'"
+          required
+        />
         <button
           mat-icon-button
           matSuffix
-          formControlName="password"
           (click)="clickEvent($event)"
           [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hide()"

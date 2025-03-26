@@ -71,8 +71,6 @@ export class FormSignUpComponent {
   }
   signUp() {
     if (this.signUpForm.valid) {
-      console.log(this.signUpForm.controls.email.value?.toString());
-
       /// Check to see if password is not blank
       if (
         this.signUpForm.controls.password.value &&
@@ -82,13 +80,11 @@ export class FormSignUpComponent {
         /// stores user email and user name
         this.signUpService.userName = this.signUpForm.controls.username.value;
         this.signUpService.userEmail = this.signUpForm.controls.email.value;
-        console.log('Email: ', this.signUpForm.controls.email.value);
-        console.log('Password: ', this.signUpForm.controls.password.value);
+
         /// hashes the passwords
         this.signUpService
           .hash_password(this.signUpForm.controls.password.value)
           .subscribe((data) => {
-            console.log('hashed password: ', data.hashed_value);
             /// stores the hashed password in angular
             this.signUpService.userPassword = data.hashed_value;
             /// Checks to see if email and username field is not blank
@@ -116,10 +112,10 @@ export class FormSignUpComponent {
           duration: 3000,
         });
       }
-
-      this.signUpForm.reset();
     } else {
-      console.log('missing');
+      /// resets the document
+      this.signUpForm.reset();
+      // handles missing fields
       this.snackbar.open(
         'Fill in the missing forms or fill in appropriately',
         'Close',

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormsModule,
@@ -28,17 +28,21 @@ import { Router } from '@angular/router';
 export class OtpVerifyFormComponent implements OnInit {
   constructor(
     private signUpService: SignUpService,
-    private snackBar: MatSnackBar,
-    private router: Router
+    private snackBar: MatSnackBar
   ) {}
+  private router = inject(Router);
   email!: string;
   ngOnInit(): void {
     this.email = this.signUpService.userEmail;
   }
+
   otpInput = new FormGroup({
     otp_input: new UntypedFormControl('', [Validators.required]),
   });
   check_otp_match() {
+    if (!this.router) {
+      console.error('Router is undefined');
+    }
     if (this.otpInput.controls.otp_input.value) {
       this.signUpService
         .verify_otp(
@@ -46,7 +50,7 @@ export class OtpVerifyFormComponent implements OnInit {
           this.otpInput.controls.otp_input.value
         )
         .subscribe((resp) => {
-          console.log('response: \n', resp);
+          /// checks to see if the otp matches
           if (resp.matches) {
             this.signUpService
               .signUpUser(
@@ -56,7 +60,9 @@ export class OtpVerifyFormComponent implements OnInit {
               )
               .subscribe((resp) => {
                 if (resp.is_successful) {
-                  this.router.navigate(['dashboard']);
+                  /// if user is created in database, the client is navigated
+                  /// to dashboard
+                  this.navigate_Dashboard();
                   this.snackBar.open(
                     `Welcome ${resp.username} to E-learning platform`,
                     'Close',
@@ -79,5 +85,9 @@ export class OtpVerifyFormComponent implements OnInit {
     } else {
       this.snackBar.open(`Fill in the otp`, 'Close', { duration: 3000 });
     }
+  }
+  navigate_Dashboard() {
+    console.log('Navigating....');
+    this.router.navigate(['dashboard']);
   }
 }

@@ -1,7 +1,17 @@
 <form [formGroup]="otpInput" (ngSubmit)="check_otp_match()">
   <mat-form-field>
     <mat-label> OTP code </mat-label>
-    <input matInput formControlName="otp_input" />
+    <input
+      matInput
+      placeholder="53323"
+      formControlName="otp_input"
+      (blur)="errorMessage()"
+    />
+    @if (otpInput.controls.otp_input.invalid) {
+    <mat-error>
+      {{ error_message() }}
+    </mat-error>
+    }
   </mat-form-field>
 
   <button class="submit_button" type="submit" mat-flat-button>

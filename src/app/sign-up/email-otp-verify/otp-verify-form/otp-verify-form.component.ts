@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import {
   FormGroup,
   FormsModule,
@@ -32,6 +32,7 @@ export class OtpVerifyFormComponent implements OnInit {
   ) {}
   private router = inject(Router);
   email!: string;
+  error_message = signal('');
   ngOnInit(): void {
     this.email = this.signUpService.userEmail;
   }
@@ -89,5 +90,12 @@ export class OtpVerifyFormComponent implements OnInit {
   navigate_Dashboard() {
     console.log('Navigating....');
     this.router.navigate(['dashboard']);
+  }
+  errorMessage() {
+    if (this.otpInput.controls.otp_input.hasError('required')) {
+      this.error_message.set('Please enter an otp');
+    } else {
+      this.error_message.set('');
+    }
   }
 }

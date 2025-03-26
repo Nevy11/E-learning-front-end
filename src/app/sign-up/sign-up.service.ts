@@ -1,12 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ReturnedHashValue, ReturnedOtp } from './sign-up';
+import {
+  ReturnedHashValue,
+  ReturnedOtp,
+  ReturnedSignUp,
+  verifyOtp,
+} from './sign-up';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SignUpService {
-  url: string = '127.0.0.1:8080';
+  url: string = 'http://127.0.0.1:8080';
   constructor(private http: HttpClient) {}
   private user_email!: string;
   private user_password!: string;
@@ -46,11 +51,29 @@ export class SignUpService {
   }
 
   hash_password(v: string) {
-    return this.http.post<ReturnedHashValue>(this.url, { value: v });
+    return this.http.post<ReturnedHashValue>(`${this.url}/hash_value`, {
+      value: v,
+    });
   }
   send_otp(email_address: string) {
-    return this.http.post<ReturnedOtp>(this.url, {
+    return this.http.post<ReturnedOtp>(`${this.url}/send_otp`, {
       email_address: email_address,
     });
+  }
+  verify_otp(hashed_value: string, entered_value: string) {
+    return this.http.post<verifyOtp>(`${this.url}/verify_hash`, {
+      hashed_value: hashed_value,
+      entered_value: entered_value,
+    });
+  }
+  signUpUser(userEmail: string, userPassword: string, username: string) {
+    return this.http.post<ReturnedSignUp>(
+      `${this.url}/create_app_user_server`,
+      {
+        username: username,
+        useremail: userEmail,
+        userpassword: userPassword,
+      }
+    );
   }
 }

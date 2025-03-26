@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SignUpService } from '../sign-up.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'nevy11-form-sign-up',
@@ -50,7 +51,7 @@ export class FormSignUpComponent {
   }
   errorMessage = signal('');
   errorUsernameMessage = signal('');
-  constructor(private signUpService: SignUpService) {}
+  constructor(private signUpService: SignUpService, private router: Router) {}
   updateErrorMessage() {
     if (this.signUpForm.controls.email.hasError('required')) {
       this.errorMessage.set('You must enter a value');
@@ -71,45 +72,44 @@ export class FormSignUpComponent {
   signUp() {
     if (this.signUpForm.valid) {
       console.log(this.signUpForm.controls.email.value?.toString());
+
       /// Check to see if password is not blank
-      if (this.signUpForm.controls.password.value) {
+      if (
+        this.signUpForm.controls.password.value &&
+        this.signUpForm.controls.email.value &&
+        this.signUpForm.controls.username.value
+      ) {
+        /// stores user email and user name
+        this.signUpService.userName = this.signUpForm.controls.username.value;
+        this.signUpService.userEmail = this.signUpForm.controls.email.value;
+        console.log('Email: ', this.signUpForm.controls.email.value);
+        console.log('Password: ', this.signUpForm.controls.password.value);
         /// hashes the passwords
         this.signUpService
           .hash_password(this.signUpForm.controls.password.value)
           .subscribe((data) => {
+            console.log('hashed password: ', data.hashed_value);
             /// stores the hashed password in angular
             this.signUpService.userPassword = data.hashed_value;
             /// Checks to see if email and username field is not blank
-            if (
-              this.signUpForm.controls.email.value &&
-              this.signUpForm.controls.username.value
-            ) {
-              /// stores user email and user name
-              this.signUpService.userName =
-                this.signUpForm.controls.username.value;
-              this.signUpService.userEmail =
-                this.signUpForm.controls.email.value;
-              /// send the otp to the user's email address
-              this.signUpService
-                .send_otp(this.signUpService.userEmail)
-                .subscribe((resp) => {
-                  /// check to see if the request was a success
-                  if (resp.is_success) {
-                    /// store the returned hashed otp in the client
-                    this.signUpService.HashedOtp = resp.hashed_otp;
-                  } else {
-                    /// handle any failure as a result of otp error
-                    this.snackbar.open(`${resp.message}`, 'Close', {
-                      duration: 3000,
-                    });
-                  }
-                });
-            } else {
-              /// handles any error relating to the missing form
-              this.snackbar.open('Fill in the missing forms', 'Close', {
-                duration: 3000,
+
+            /// send the otp to the user's email address
+            this.signUpService
+              .send_otp(this.signUpService.userEmail)
+              .subscribe((resp) => {
+                /// check to see if the request was a success
+                if (resp.is_success) {
+                  /// store the returned hashed otp in the client
+                  this.signUpService.HashedOtp = resp.hashed_otp;
+                  console.log(`hashed otp: ${this.signUpService.HashedOtp}`);
+                  this.router.navigate(['otpVerification']);
+                } else {
+                  /// handle any failure as a result of otp error
+                  this.snackbar.open(`${resp.message}`, 'Close', {
+                    duration: 3000,
+                  });
+                }
               });
-            }
           });
       } else {
         this.snackbar.open('Fill in the missing forms', 'Close', {

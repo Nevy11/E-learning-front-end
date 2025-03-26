@@ -1,5 +1,5 @@
 <div class="form">
-  <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+  <form [formGroup]="signUpForm">
     <div class="email_field">
       <mat-form-field>
         <mat-label>Enter your email</mat-label>
@@ -54,7 +54,7 @@
       </mat-form-field>
     </div>
     <div class="bottom-button">
-      <button mat-flat-button type="submit">sign Up</button>
+      <button mat-flat-button type="submit" (click)="signUp()">sign Up</button>
     </div>
   </form>
 </div>

@@ -1,0 +1,13 @@
+<form [formGroup]="otpInput" (ngSubmit)="check_otp_match()">
+  <mat-form-field>
+    <mat-label> OTP code </mat-label>
+    <input matInput formControlName="otp_input" />
+  </mat-form-field>
+
+  <button class="submit_button" type="submit" mat-flat-button>
+    check code
+  </button>
+</form>
+@if (email) {
+<div>Enter the otp sent to {{ email }}</div>
+}

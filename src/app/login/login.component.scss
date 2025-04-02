@@ -1,0 +1,26 @@
+// tablet
+@media (min-width: 600px) and (max-width: 1024px) {
+  .login-header {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+}
+
+// mobile phone
+@media (max-width: 599px) {
+  .login-header {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+  }
+}
+
+// large screen
+@media (min-width: 1024px) {
+  .login-header {
+    display: flex;
+    justify-content: center;
+    margin-top: 8rem;
+  }
+}

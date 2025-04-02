@@ -1,1 +1,47 @@
-<p>login-form works!</p>
+<form [formGroup]="login_form">
+  <div>
+    <mat-form-field>
+      <mat-label>Enter your Username</mat-label>
+      <input
+        matInput
+        required
+        formControlName="username_field"
+        (blur)="updateUsernameErr()"
+      />
+    </mat-form-field>
+    @if (login_form.controls.username_field.invalid) {
+    <mat-error>
+      {{ username_err() }}
+    </mat-error>
+    }
+  </div>
+  <div class="password-field">
+    <mat-form-field>
+      <mat-label>Enter your password</mat-label>
+      <input
+        matInput
+        [type]="hide() ? 'password' : 'text'"
+        formControlName="password_field"
+        (blur)="updatePasswordErr()"
+      />
+
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="clickEvent($event)"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide()"
+      >
+        <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+      @if (login_form.controls.password_field.invalid) {
+      <mat-error>
+        {{ password_err() }}
+      </mat-error>
+      }
+    </mat-form-field>
+  </div>
+  <div class="btn">
+    <button mat-flat-button [disabled]="login_form.invalid">login</button>
+  </div>
+</form>

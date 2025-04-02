@@ -1,0 +1,28 @@
+// tablet
+@media (min-width: 600px) and (max-width: 1024px) {
+  mat-form-field {
+    width: 25rem;
+    // margin-top: 2.5rem;
+  }
+  .password-field {
+    margin-top: 2.5rem;
+  }
+  .btn {
+    display: flex;
+    justify-content: end;
+    margin-top: 3rem;
+  }
+}
+
+@media (max-width: 599px) {
+  mat-form-field {
+    width: 20rem;
+  }
+}
+
+// large screen
+@media (min-width: 1024px) {
+  mat-form-field {
+    width: 40rem;
+  }
+}

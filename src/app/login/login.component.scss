@@ -5,6 +5,11 @@
     justify-content: center;
     margin-top: 3rem;
   }
+  .login-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+  }
 }
 
 // mobile phone
@@ -14,11 +19,21 @@
     justify-content: center;
     margin-top: 5rem;
   }
+  .login-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+  }
 }
 
 // large screen
 @media (min-width: 1024px) {
   .login-header {
+    display: flex;
+    justify-content: center;
+    margin-top: 8rem;
+  }
+  .login-form {
     display: flex;
     justify-content: center;
     margin-top: 8rem;

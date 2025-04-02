@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   FormGroup,
   FormsModule,
@@ -10,6 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'nevy11-login-form',
@@ -25,6 +27,8 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './login-form.component.scss',
 })
 export class LoginFormComponent {
+  snackbar = inject(MatSnackBar);
+  router = inject(Router);
   // button
   hide = signal(true);
   clickEvent(event: MouseEvent) {
@@ -60,6 +64,16 @@ export class LoginFormComponent {
       this.password_err.set('password must be longer than 6 characters');
     } else {
       this.password_err.set('');
+    }
+  }
+
+  login() {
+    if (this.login_form.valid) {
+      this.router.navigate(['dashboard']);
+    } else {
+      this.snackbar.open('please fill in the missing fields', `Close`, {
+        duration: 3000,
+      });
     }
   }
 }

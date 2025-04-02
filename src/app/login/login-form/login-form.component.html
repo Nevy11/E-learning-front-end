@@ -42,6 +42,13 @@
     </mat-form-field>
   </div>
   <div class="btn">
-    <button mat-flat-button [disabled]="login_form.invalid">login</button>
+    <button
+      mat-flat-button
+      [disabled]="login_form.invalid"
+      type="submit"
+      (click)="login()"
+    >
+      login
+    </button>
   </div>
 </form>

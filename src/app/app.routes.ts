@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { EmailOtpVerifyComponent } from './sign-up/email-otp-verify/email-otp-verify.component';
 import { EDashboardComponent } from './e-dashboard/e-dashboard.component';
+import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
   {
@@ -10,7 +11,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'sign up',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
@@ -20,5 +21,9 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: EDashboardComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
   },
 ];

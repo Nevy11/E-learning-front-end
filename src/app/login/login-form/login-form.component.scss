@@ -9,7 +9,7 @@
   }
   .btn {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     margin-top: 3rem;
   }
 }
@@ -18,11 +18,21 @@
   mat-form-field {
     width: 20rem;
   }
+  .btn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+  }
 }
 
 // large screen
 @media (min-width: 1024px) {
   mat-form-field {
     width: 40rem;
+  }
+  .btn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
   }
 }

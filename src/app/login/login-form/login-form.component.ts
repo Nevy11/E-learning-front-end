@@ -67,6 +67,7 @@ export class LoginFormComponent {
     }
   }
 
+  // login function
   login() {
     if (this.login_form.valid) {
       this.router.navigate(['dashboard']);
@@ -75,5 +76,10 @@ export class LoginFormComponent {
         duration: 3000,
       });
     }
+  }
+
+  // sign function
+  signUp() {
+    this.router.navigate(['sign up']);
   }
 }

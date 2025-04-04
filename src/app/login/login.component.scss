@@ -10,6 +10,20 @@
     justify-content: center;
     margin-top: 5rem;
   }
+  .forget-password {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    color: rgb(77, 77, 180);
+    font-size: x-large;
+  }
+  .or {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
 }
 
 // mobile phone

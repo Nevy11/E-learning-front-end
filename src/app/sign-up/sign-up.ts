@@ -9,6 +9,8 @@ export interface ReturnedOtp {
 }
 export interface verifyOtp {
   matches: boolean;
+  is_success: boolean;
+  message: String;
 }
 export interface ReturnedSignUp {
   username: string;

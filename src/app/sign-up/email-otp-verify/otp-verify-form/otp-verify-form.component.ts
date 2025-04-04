@@ -51,36 +51,43 @@ export class OtpVerifyFormComponent implements OnInit {
           this.otpInput.controls.otp_input.value
         )
         .subscribe((resp) => {
-          /// checks to see if the otp matches
-          if (resp.matches) {
-            this.signUpService
-              .signUpUser(
-                this.signUpService.userEmail,
-                this.signUpService.userPassword,
-                this.signUpService.userName
-              )
-              .subscribe((resp) => {
-                if (resp.is_successful) {
-                  /// if user is created in database, the client is navigated
-                  /// to dashboard
-                  this.navigate_Dashboard();
-                  this.snackBar.open(
-                    `Welcome ${resp.username} to E-learning platform`,
-                    'Close',
-                    { duration: 3000 }
-                  );
-                } else {
-                  console.error(`${resp.message}`);
-                  this.snackBar.open(
-                    `Error while updating the user.. please try again`,
-                    'Close',
-                    { duration: 3000 }
-                  );
-                }
-              });
+          /// Checks to see if there is any error
+          if (resp.is_success) {
+            /// checks to see if the otp matches
+            if (resp.matches) {
+              this.signUpService
+                .signUpUser(
+                  this.signUpService.userEmail,
+                  this.signUpService.userPassword,
+                  this.signUpService.userName
+                )
+                .subscribe((resp) => {
+                  if (resp.is_successful) {
+                    /// if user is created in database, the client is navigated
+                    /// to dashboard
+                    this.navigate_Dashboard();
+                    this.snackBar.open(
+                      `Welcome ${resp.username} to E-learning platform`,
+                      'Close',
+                      { duration: 3000 }
+                    );
+                  } else {
+                    console.error(`${resp.message}`);
+                    this.snackBar.open(
+                      `Error while updating the user.. please try again`,
+                      'Close',
+                      { duration: 3000 }
+                    );
+                  }
+                });
+            } else {
+              this.otpInput.reset;
+              this.snackBar.open(`Wrong otp`, 'Close', { duration: 30000 });
+            }
           } else {
-            this.otpInput.reset;
-            this.snackBar.open(`Wrong otp`, 'Close', { duration: 30000 });
+            this.snackBar.open(`Incorrect password`, `Close`, {
+              duration: 3000,
+            });
           }
         });
     } else {
@@ -95,6 +102,7 @@ export class OtpVerifyFormComponent implements OnInit {
     if (this.otpInput.controls.otp_input.hasError('required')) {
       this.error_message.set('Please enter an otp');
     } else {
+      ` `;
       this.error_message.set('');
     }
   }

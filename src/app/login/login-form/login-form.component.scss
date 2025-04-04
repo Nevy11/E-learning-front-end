@@ -14,9 +14,18 @@
   }
 }
 
+// phone
 @media (max-width: 599px) {
   mat-form-field {
     width: 20rem;
+  }
+  .btn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+  }
+  .password-field {
+    margin-top: 2.5rem;
   }
   .btn {
     display: flex;

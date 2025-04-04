@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'nevy11-login-form',
@@ -28,6 +29,7 @@ import { Router } from '@angular/router';
 })
 export class LoginFormComponent {
   snackbar = inject(MatSnackBar);
+  loginService = inject(LoginService);
   router = inject(Router);
   // button
   hide = signal(true);
@@ -75,6 +77,25 @@ export class LoginFormComponent {
   // login function
   login() {
     if (this.login_form.valid) {
+      this.loginService
+        .login_user({
+          email_address: this.login_form.controls.useremail_field.value,
+          password: this.login_form.controls.password_field.value,
+        })
+        .subscribe((resp) => {
+          if (resp.is_success) {
+            if (resp.is_correct) {
+            } else {
+              this.snackbar.open(``);
+            }
+          } else {
+            this.snackbar.open(
+              `Error while updating the user's password`,
+              'Close',
+              { duration: 3000 }
+            );
+          }
+        });
       this.router.navigate(['dashboard']);
     } else {
       this.snackbar.open('please fill in the missing fields', `Close`, {
@@ -88,3 +109,8 @@ export class LoginFormComponent {
     this.router.navigate(['sign up']);
   }
 }
+
+/// update user's forget password to send an otp back to the user
+/// verify the otp
+/// collect the user's password and update it if the otp matches
+/// navigate the user to dashboard with a message of updated successfully

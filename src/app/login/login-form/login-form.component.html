@@ -1,17 +1,18 @@
 <form [formGroup]="login_form">
   <div>
     <mat-form-field>
-      <mat-label>Enter your Username</mat-label>
+      <mat-label>Enter your Email Address</mat-label>
       <input
         matInput
+        placeholder="pat@example.com"
         required
-        formControlName="username_field"
-        (blur)="updateUsernameErr()"
+        formControlName="useremail_field"
+        (blur)="updateEmailErr()"
       />
     </mat-form-field>
-    @if (login_form.controls.username_field.invalid) {
+    @if (login_form.controls.useremail_field.invalid) {
     <mat-error>
-      {{ username_err() }}
+      {{ userEmailErr() }}
     </mat-error>
     }
   </div>

@@ -38,20 +38,25 @@ export class LoginFormComponent {
 
   // Form group
   login_form = new FormGroup({
-    username_field: new UntypedFormControl('', [Validators.required]),
+    useremail_field: new UntypedFormControl('', [
+      Validators.required,
+      Validators.email,
+    ]),
     password_field: new UntypedFormControl('', [
       Validators.required,
       Validators.minLength(6),
     ]),
   });
 
-  // handling username error
-  username_err = signal('');
-  updateUsernameErr() {
-    if (this.login_form.controls.username_field.hasError('required')) {
-      this.username_err.set('Username cannot be blank');
+  // handling  error
+  userEmailErr = signal('');
+  updateEmailErr() {
+    if (this.login_form.controls.useremail_field.hasError('required')) {
+      this.userEmailErr.set('Email cannot be blank');
+    } else if (this.login_form.controls.useremail_field.hasError('email')) {
+      this.userEmailErr.set('Not a valid email');
     } else {
-      this.username_err.set('');
+      this.userEmailErr.set('');
     }
   }
 

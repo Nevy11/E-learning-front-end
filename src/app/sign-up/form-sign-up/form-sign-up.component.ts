@@ -123,4 +123,9 @@ export class FormSignUpComponent {
       );
     }
   }
+
+  // login
+  login() {
+    this.router.navigate(['login']);
+  }
 }

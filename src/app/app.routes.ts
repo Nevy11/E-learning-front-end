@@ -3,6 +3,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { EmailOtpVerifyComponent } from './sign-up/email-otp-verify/email-otp-verify.component';
 import { EDashboardComponent } from './e-dashboard/e-dashboard.component';
 import { LoginComponent } from './login/login.component';
+import { ForgetPasswordComponent } from './login/forget-password/forget-password.component';
 
 export const routes: Routes = [
   {
@@ -26,4 +27,5 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
+  { path: 'forget password', component: ForgetPasswordComponent },
 ];

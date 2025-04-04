@@ -54,7 +54,15 @@
       </mat-form-field>
     </div>
     <div class="bottom-button">
-      <button mat-flat-button type="submit" (click)="signUp()">sign Up</button>
+      <button mat-flat-button (click)="login()">login</button>
+      <button
+        mat-flat-button
+        type="submit"
+        (click)="signUp()"
+        [disabled]="signUpForm.invalid"
+      >
+        sign Up
+      </button>
     </div>
   </form>
 </div>
